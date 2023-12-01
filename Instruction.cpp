@@ -214,7 +214,7 @@ void AddInstruction::execute(Receiver &r) {
 
 void GotoInstruction::execute(Receiver &r) {
     std::string rough_i = this->args[0];
-    int i = INT_MIN;
+    int i = -55;
 
     if(exists(rough_i, r)) {
         WLStruct semi_i = r.dm[rough_i];
@@ -232,7 +232,7 @@ void IfInstruction::execute(Receiver &r) {
     std::string rough_x = this->args[0];
     std::string rough_i = this->args[1];
 
-    int i = INT_MIN;
+    int i = -55;
     int x = -1;
 
     // If it isn't a variable... then doesnt matter
