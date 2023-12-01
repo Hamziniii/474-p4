@@ -8,7 +8,7 @@
 
 #include <memory>
 #include <vector>
-#include <unordered_map>
+#include <map>
 #include "Instruction.h"
 #include "LinkedList.h"
 
@@ -21,7 +21,7 @@ public:
     bool halted;
     int maxPc;
     int pc; // Program counter
-    std::unordered_map<std::string, WLStruct> dm; // Program memory/
+    std::map<std::string, WLStruct> dm; // Program memory/
 
     Receiver();
     void extractCommands(const std::vector<std::string>& fileText);
@@ -30,6 +30,7 @@ public:
     bool canContinue();
     void nextInstruction();
     void restOfInstructions();
+    void printData();
 };
 
 

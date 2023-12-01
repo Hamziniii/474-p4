@@ -35,10 +35,14 @@ private:
 
 public:
     LinkedList();
+    int getSize() const;
     void append(const WLStruct& val);
+    void prepend(const WLStruct& val);
     WLStruct access(int index) const;
-    void combine(const LinkedList& other);
-    void deepCopy(const LinkedList& other);
+    bool accessible(int index) const;
+    void set(int index, const WLStruct& w);
+    void combine(const std::shared_ptr<LinkedList>& other);
+    std::shared_ptr<LinkedList> copyOf();
     std::string toString() const;
 };
 

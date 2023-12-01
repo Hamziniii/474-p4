@@ -5,6 +5,7 @@
 #include <sstream>
 #include <memory>
 #include <iostream>
+#include <algorithm>
 
 #include "Receiver.h"
 #include "Instruction.h"
@@ -16,7 +17,10 @@ Receiver::Receiver() {
 }
 
 void Receiver::extractCommands(const std::vector<std::string>& fileText) {
-    for(auto& str : fileText) {
+    for(auto& _str : fileText) {
+        std::string str = _str;
+        str.erase(std::remove(str.begin(), str.end(), ','), str.end());
+
         std::string cmd;
         std::vector<std::string> all;
 
@@ -61,8 +65,11 @@ void Receiver::extractCommands(const std::vector<std::string>& fileText) {
 
 void Receiver::nextInstruction() {
     if(canContinue()) {
-        this->commands[pc]->execute(*this);
+        auto& cmd = this->commands[pc];
+        std::cout << "Executing " << cmd.get()->name << std::endl;
+        cmd->execute(*this);
         advance();
+        printData();
     }
 }
 
@@ -71,6 +78,7 @@ void Receiver::restOfInstructions() {
         this->commands[pc]->execute(*this);
         advance();
     }
+    printData();
 }
 
 void Receiver::computeHalted() {
@@ -90,3 +98,12 @@ bool Receiver::canContinue() {
     return !halted;
 }
 
+void Receiver::printData() {
+    std::cout << "PC: " <<  this->pc - 1 << std::endl;
+    for(auto& p : this->dm) {
+        if(p.second.type == LIST)
+           std::cout << p.first << ": " << p.second.List->toString() << std::endl;
+        else if(p.second.type == INT)
+            std::cout << p.first << ": " << p.second.Integer << std::endl;
+    }
+}
