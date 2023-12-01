@@ -9,7 +9,7 @@
 
 bool isNumber(const std::string& str) {
     return std::all_of(str.begin(), str.end(), [](char c) {
-        return std::isdigit(c);
+        return std::isdigit(c) || c == '-';
     });
 }
 
@@ -144,8 +144,10 @@ void SetInstruction::execute(Receiver &r) {
         WLStruct semi_i = r.dm[rough_i];
         if(semi_i.type == INT)
             i = semi_i.Integer;
-        else
+        else {
             std::cout << "Set: " << rough_i << " isn't a variable or int." << std::endl;
+            return;
+        }
     }
 
     if(exists(rough_list, r)) {

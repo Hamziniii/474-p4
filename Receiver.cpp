@@ -66,7 +66,7 @@ void Receiver::extractCommands(const std::vector<std::string>& fileText) {
 void Receiver::nextInstruction() {
     if(canContinue()) {
         auto& cmd = this->commands[pc];
-        std::cout << "Executing " << cmd.get()->name << std::endl;
+        std::cout << "Executing " << cmd->getName() << std::endl;
         cmd->execute(*this);
         advance();
         printData();

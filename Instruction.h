@@ -16,7 +16,7 @@ class Instruction {
 private:
     std::vector<std::string> args;
 public:
-    std::string name;
+    virtual std::string getName() = 0;
     virtual void execute(Receiver& r) = 0;
 };
 
@@ -24,16 +24,16 @@ class VarIntInstruction: public Instruction {
 private:
     std::vector<std::string> args;
 public:
-    std::string name;
+    std::string getName() override { return "VarIntInstruction"; }
     void execute(Receiver& r) override;
-    explicit VarIntInstruction(std::vector<std::string> args): args(std::move(args)), name("VarIntInstruction") {};
+    explicit VarIntInstruction(std::vector<std::string> args): args(std::move(args)) {};
 };
 
 class VarListInstruction: public Instruction {
 private:
     std::vector<std::string> args;
 public:
-    std::string name = "VarListInstruction";
+    std::string getName() override { return "VarListInstruction"; }
     void execute(Receiver& r) override;
     explicit VarListInstruction(std::vector<std::string> args) : args(std::move(args)) {};
 };
@@ -42,7 +42,7 @@ class CombineInstruction: public Instruction {
 private:
     std::vector<std::string> args;
 public:
-    std::string name = "CombineInstruction";
+    std::string getName() override { return "CombineInstruction"; }
     void execute(Receiver& r) override;
     explicit CombineInstruction(std::vector<std::string> args) : args(std::move(args)) {};
 };
@@ -51,7 +51,7 @@ class GetInstruction: public Instruction {
 private:
     std::vector<std::string> args;
 public:
-    std::string name = "GetInstruction";
+    std::string getName() override { return "GetInstruction"; }
     void execute(Receiver& r) override;
     explicit GetInstruction(std::vector<std::string> args) : args(std::move(args)) {};
 };
@@ -60,7 +60,7 @@ class SetInstruction: public Instruction {
 private:
     std::vector<std::string> args;
 public:
-    std::string name = "SetInstruction";
+    std::string getName() override { return "SetInstruction"; }
     void execute(Receiver& r) override;
     explicit SetInstruction(std::vector<std::string> args) : args(std::move(args)) {};
 };
@@ -69,7 +69,7 @@ class CopyInstruction: public Instruction {
 private:
     std::vector<std::string> args;
 public:
-    std::string name = "CopyInstruction";
+    std::string getName() override { return "CopyInstruction"; }
     void execute(Receiver& r) override;
     explicit CopyInstruction(std::vector<std::string> args) : args(std::move(args)) {};
 };
@@ -78,7 +78,7 @@ class ChsInstruction: public Instruction {
 private:
     std::vector<std::string> args;
 public:
-    std::string name = "ChsInstruction";
+    std::string getName() override { return "ChsInstruction"; }
     void execute(Receiver& r) override;
     explicit ChsInstruction(std::vector<std::string> args) : args(std::move(args)) {};
 };
@@ -87,7 +87,7 @@ class AddInstruction: public Instruction {
 private:
     std::vector<std::string> args;
 public:
-    std::string name = "AddInstruction";
+    std::string getName() override { return "AddInstruction"; }
     void execute(Receiver& r) override;
     explicit AddInstruction(std::vector<std::string> args) : args(std::move(args)) {};
 };
@@ -96,7 +96,7 @@ class GotoInstruction: public Instruction {
 private:
     std::vector<std::string> args;
 public:
-    std::string name = "GotoInstruction";
+    std::string getName() override { return "GotoInstruction"; }
     void execute(Receiver& r) override;
     explicit GotoInstruction(std::vector<std::string> args) : args(std::move(args)) {};
 };
@@ -105,7 +105,7 @@ class IfInstruction: public Instruction {
 private:
     std::vector<std::string> args;
 public:
-    std::string name = "IfInstruction";
+    std::string getName() override { return "IfInstruction"; }
     void execute(Receiver& r) override;
     explicit IfInstruction(std::vector<std::string> args) : args(std::move(args)) {};
 };
@@ -114,7 +114,7 @@ class HltInstruction: public Instruction {
 private:
     std::vector<std::string> args;
 public:
-    std::string name = "HltInstruction";
+    std::string getName() override { return "HltInstruction"; }
     void execute(Receiver& r) override;
     explicit HltInstruction(std::vector<std::string> args) : args(std::move(args)) {};
 };
