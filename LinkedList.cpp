@@ -75,6 +75,7 @@ void LinkedList::set(int index, const WLStruct& w) {
     node->val = w;
 }
 
+// Recursively deep copies
 std::shared_ptr<LinkedList> LinkedList::copyOf() {
     LinkedList other;
 

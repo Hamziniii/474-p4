@@ -7,16 +7,19 @@
 #include "Instruction.h"
 #include "Receiver.h"
 
+// check if its a valid number, aka is a number, can include negative sign
 bool isNumber(const std::string& str) {
     return std::all_of(str.begin(), str.end(), [](char c) {
         return std::isdigit(c) || c == '-';
     });
 }
 
+// check to see if string is a key in the data memory
 bool exists(const std::string& str, Receiver &r) {
     return r.dm.count(str) != 0;
 }
 
+// construct a WLStruct of type int
 WLStruct WLInt(int val) {
     WLStruct w;
     w.type = INT;
@@ -25,6 +28,7 @@ WLStruct WLInt(int val) {
     return w;
 }
 
+// construct a WLStruct of type List
 WLStruct WLList() {
     WLStruct w;
     w.type = LIST;
@@ -32,6 +36,8 @@ WLStruct WLList() {
     w.Integer = -1;
     return w;
 }
+
+// Functions for each of the commands below:
 
 void VarIntInstruction::execute(Receiver &r) {
     std::string x = this->args[0];

@@ -9,17 +9,23 @@
 #include <memory>
 #include <cstring>
 
+// Need LinkedList type ahead of time for WLStruct
 class LinkedList;
 
+// Enum to figure out what type is held in struct
 enum WLType {
     INT, LIST
 };
+
+// Essentially a union without the union part
+// Contains either an int or a list
 struct WLStruct {
     WLType type;
     std::shared_ptr<LinkedList> List{};
     int Integer{};
 };
 
+// Node, where each node can either be a list or int
 class Node {
 public:
     WLStruct val;
@@ -27,6 +33,7 @@ public:
     explicit Node(WLStruct val);
 };
 
+// Regular LL implementation but smart
 class LinkedList {
 private:
     std::shared_ptr<Node> root;
