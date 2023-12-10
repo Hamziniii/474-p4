@@ -1,24 +1,26 @@
-VARINT a 1
-VARINT b 2
-VARINT c 3
-VARLIST d a b c
-VARLIST e d a b c
-VARLIST f e d a b c
-GET g 0 f
-GET h 0 e
-COPY i h
-COPY j h
-COMBINE i j
-SET -1 1 d
-COPY i g
-CHS a
-ADD b c
-VARINT z 0
-IF z 18
+VARINT x 100
+VARLIST list1 100, 200, 300
+VARLIST list2 400, 500, 600
+VARLIST list12 list1, list2
+COMBINE list1 list2
+GET y 2 list1
+GET z 1 list12
+ADD x y
+VARLIST list3 700, 800, 900
+SET list3 1 list2
+COPY list4 list2
+GET list5 1 list4
+SET 100 2 list5
+GOTO 15
+VARINT GotoPit 1
+IF 0 17
+VARINT IF0Pit 1
+VARINT zero 0
+IF zero 20
+VARINT IFZeroPit 1
+VARINT IF1PIT 1
+IF 1 23
+VARINT IF1PIT 0
+CHS y
 HLT
-VARINT v 1
-VARINT q -5
-IF q 23
-ADD q v
-GOTO 20
-HLT
+VARINT HltPit 1
